@@ -1,13 +1,33 @@
-const canvas = document.getElementById('starfield');
-const ctx = canvas.getContext('2d');
-
+let canvas;
+let ctx;
 let stars = [];
 const numStars = 100;
 const speed = 2;
 
+function initializeStarfield() {
+  canvas = document.createElement('canvas');
+  canvas.id = 'starfield';
+  document.body.appendChild(canvas);
+  ctx = canvas.getContext('2d');
+  resizeCanvas();
+  createStars();
+  animate();
+}
+
+function removeStarfield() {
+  if (canvas) {
+    document.body.removeChild(canvas);
+    canvas = null;
+    ctx = null;
+    stars = [];
+  }
+}
+
 function resizeCanvas() {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+  if (canvas) {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
 }
 
 function createStars() {
@@ -30,47 +50,27 @@ function moveStars() {
 }
 
 function drawStars() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  for (let i = 0; i < numStars; i++) {
-    const k = 128.0 / stars[i].z;
-    const x = stars[i].x * k + canvas.width / 2;
-    const y = stars[i].y * k + canvas.height / 2;
-    const size = (1 - stars[i].z / canvas.width) * 5;
-    ctx.beginPath();
-    ctx.arc(x, y, size, 0, 2 * Math.PI);
-    ctx.fillStyle = 'white';
-    ctx.fill();
+  if (ctx) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (let i = 0; i < numStars; i++) {
+      const k = 128.0 / stars[i].z;
+      const x = stars[i].x * k + canvas.width / 2;
+      const y = stars[i].y * k + canvas.height / 2;
+      const size = (1 - stars[i].z / canvas.width) * 5;
+      ctx.beginPath();
+      ctx.arc(x, y, size, 0, 2 * Math.PI);
+      ctx.fillStyle = 'white';
+      ctx.fill();
+    }
   }
 }
 
 function animate() {
-  moveStars();
-  drawStars();
-  requestAnimationFrame(animate);
+  if (canvas) {
+    moveStars();
+    drawStars();
+    requestAnimationFrame(animate);
+  }
 }
 
-// function onMouseMove(event) {
-//   const centerX = canvas.width / 2;
-//   const centerY = canvas.height / 2;
-//   const deltaX = event.clientX - centerX;
-//   const deltaY = event.clientY - centerY;
-//   for (let i = 0; i < numStars; i++) {
-//     stars[i].x += deltaX * 0.01;
-//     stars[i].y += deltaY * 0.01;
-//   }
-// }
-
-// function onTouchMove(event) {
-//   if (event.touches.length > 0) {
-//     const touch = event.touches[0];
-//     onMouseMove(touch);
-//   }
-// }
-
-// canvas.addEventListener('mousemove', onMouseMove);
-// canvas.addEventListener('touchmove', onTouchMove);
 window.addEventListener('resize', resizeCanvas);
-
-resizeCanvas();
-createStars();
-animate();
