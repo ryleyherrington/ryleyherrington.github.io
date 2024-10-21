@@ -122,3 +122,24 @@ body {
     opacity: 0;
   }
 }
+
+/* Set background color to white for snow class */
+.snow {
+  background-color: white;
+}
+
+/* Set background color to black for starfield class */
+.starfield {
+  background-color: black;
+}
+
+/* Styles for the starfield background */
+#starfield {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background: black;
+}
