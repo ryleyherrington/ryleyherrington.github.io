@@ -198,6 +198,8 @@
       -->
     </div><!-- /.container -->
 
+    <canvas id="starfield"></canvas>
+
     <script>
       document.getElementById('theme-switcher').addEventListener('click', function() {
         var theme = document.body.classList.contains('snow') ? 'dark' : 'light';
@@ -205,17 +207,22 @@
           document.body.classList.remove('starfield');
           document.body.classList.add('snow');
           this.innerHTML = '❄️';
+          removeElementsByClass('star');
           addSnowflakes();
+          document.body.style.backgroundColor = 'white';
         } else {
           document.body.classList.remove('snow');
           document.body.classList.add('starfield');
           this.innerHTML = '⭐';
+          removeElementsByClass('snowflake');
           addStars();
+          document.body.style.backgroundColor = 'black';
         }
       });
 
       // Add snowflakes and stars
       function addSnowflakes() {
+        removeElementsByClass('snowflake');
         for (var i = 0; i < 100; i++) {
           var snowflake = document.createElement('div');
           snowflake.className = 'snowflake';
@@ -227,6 +234,7 @@
       }
 
       function addStars() {
+        removeElementsByClass('star');
         for (var i = 0; i < 100; i++) {
           var star = document.createElement('div');
           star.className = 'star';
@@ -238,14 +246,25 @@
         }
       }
 
+      function removeElementsByClass(className) {
+        var elements = document.getElementsByClassName(className);
+        while (elements.length > 0) {
+          elements[0].parentNode.removeChild(elements[0]);
+        }
+      }
+
       // Add snowflakes or stars based on the initial theme
       var initialTheme = document.body.classList.contains('snow') ? 'light' : 'dark';
       if (initialTheme === 'light') {
         addSnowflakes();
+        document.body.style.backgroundColor = 'white';
       } else {
         addStars();
+        document.body.style.backgroundColor = 'black';
       }
     </script>
+
+    <script src="starfield.js"></script>
 
   </body>
 </html>
