@@ -9,15 +9,22 @@ class Snowflake {
     this.x = Math.random() * this.canvas.width;
     this.y = Math.random() * this.canvas.height;
     this.size = Math.random() * 5 + 4;
-    this.speed = Math.random() * 1 + 0.5;
-    this.angle = Math.random() * Math.PI * 2;
-    this.angleSpeed = Math.random() * 0.01 - 0.010;
+
+    // Reduced speed for slower fall
+    this.speed = Math.random() * 0.5+ 0.05;
+
+    const baseAngle = Math.PI; // Straight down
+    const variation = Math.PI / 32; 
+    this.angle = baseAngle+ (Math.random() * variation - variation / 2);
+
+    // Small angle speed for less erratic movement
+    this.angleSpeed = (Math.random() * 0.005 - 0.0025) * 0.1;
   }
 
   update() {
     this.y += this.speed;
     this.angle += this.angleSpeed;
-    this.x += Math.sin(this.angle);
+    this.x += Math.sin(this.angle); // Adjust x position based on the angle
 
     if (this.y > this.canvas.height) {
       this.reset();
