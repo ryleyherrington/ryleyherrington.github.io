@@ -77,3 +77,48 @@ body {
     border-bottom: 0;
   }
 }
+
+/* Snow background */
+.snow {
+  background: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.snowflake {
+  position: absolute;
+  top: -2em;
+  font-size: 1.5em;
+  animation-name: fall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-duration: 5s;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(100vh);
+  }
+}
+
+/* Starfield background */
+.starfield {
+  background: black;
+  position: relative;
+  overflow: hidden;
+}
+
+.star {
+  position: absolute;
+  font-size: 1em;
+  animation-name: move;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes move {
+  to {
+    transform: translate(50vw, 50vh) scale(2);
+    opacity: 0;
+  }
+}

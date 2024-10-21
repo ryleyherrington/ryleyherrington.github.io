@@ -20,10 +20,14 @@
   </head>
 
     <body>
+    <canvas id="starfield"></canvas>
 
     <div class="container">
       <div class="header clearfix">
         <h3 class="text-muted">Ryley Herrington</h3>
+        <div class="theme-picker">
+          <button id="theme-switcher">❄️</button>
+        </div>
       </div>
 
       <div class="jumbotron">
@@ -194,6 +198,42 @@
       </footer>
       -->
     </div><!-- /.container -->
+    <script src="bootstrap/js/starfield.js"></script>
+    <script>
+      document.getElementById('theme-switcher').addEventListener('click', function() {
+        var theme = document.body.classList.contains('snow') ? 'dark' : 'light';
+        if (theme === 'light') {
+          document.body.classList.remove('starfield');
+          document.body.classList.add('snow');
+          this.innerHTML = '❄️';
+          addSnowflakes();
+        } else {
+          document.body.classList.add('starfield');
+          this.innerHTML = '<canvas id="starfield"></canvas>'
+        }
+      });
+
+      // Add snowflakes and stars
+      function addSnowflakes() {
+        for (var i = 0; i < 100; i++) {
+          var snowflake = document.createElement('div');
+          snowflake.className = 'snowflake';
+          snowflake.innerHTML = '❄️';
+          snowflake.style.left = Math.random() * 100 + 'vw';
+          snowflake.style.animationDuration = Math.random() * 3 + 2 + 's';
+          document.body.appendChild(snowflake);
+        }
+      }
+
+      // Add snowflakes or stars based on the initial theme
+      var initialTheme = 'dark';
+      if (initialTheme === 'light') {
+        addSnowflakes();
+      } else {
+        document.body.classList.add('starfield');
+        this.innerHTML = '<canvas id="starfield"></canvas>'
+      }
+    </script>
 
   </body>
 </html>
