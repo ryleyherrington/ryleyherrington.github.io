@@ -8,10 +8,10 @@ class Snowflake {
   reset() {
     this.x = Math.random() * this.canvas.width;
     this.y = Math.random() * this.canvas.height;
-    this.size = Math.random() * 5 + 2;
+    this.size = Math.random() * 5 + 4;
     this.speed = Math.random() * 1 + 0.5;
     this.angle = Math.random() * Math.PI * 2;
-    this.angleSpeed = Math.random() * 0.01 - 0.005;
+    this.angleSpeed = Math.random() * 0.01 - 0.010;
   }
 
   update() {
