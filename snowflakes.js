@@ -24,6 +24,9 @@ class Snowflake {
   update() {
     this.y += this.speed;
     this.angle += this.angleSpeed;
+    const baseAngle = Math.PI; // Straight down
+    const variation = Math.PI / 32;
+    this.angle = Math.max(baseAngle - variation, Math.min(baseAngle + variation, this.angle));
     this.x += Math.sin(this.angle); // Adjust x position based on the angle
 
     if (this.y > this.canvas.height) {
