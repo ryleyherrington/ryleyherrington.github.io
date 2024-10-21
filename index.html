@@ -207,12 +207,14 @@
           this.innerHTML = '❄️';
           addSnowflakes();
         } else {
+          document.body.classList.remove('snow');
           document.body.classList.add('starfield');
-          this.innerHTML = '<canvas id="starfield"></canvas>'
+          this.innerHTML = '⭐';
+          initializeStarfield();
         }
       });
 
-      // Add snowflakes and stars
+      // Add snowflakes
       function addSnowflakes() {
         for (var i = 0; i < 100; i++) {
           var snowflake = document.createElement('div');
@@ -229,59 +231,8 @@
       if (initialTheme === 'light') {
         addSnowflakes();
       } else {
-        document.body.classList.add('starfield');
-        this.innerHTML = '<canvas id="starfield"></canvas>'
+        initializeStarfield();
       }
     </script>
-
-    <script>
-      document.getElementById('theme-switcher').addEventListener('click', function() {
-        var theme = document.body.classList.contains('snow') ? 'dark' : 'light';
-        if (theme === 'light') {
-          document.body.classList.remove('starfield');
-          document.body.classList.add('snow');
-          this.innerHTML = '❄️';
-          addSnowflakes();
-        } else {
-          document.body.classList.remove('snow');
-          document.body.classList.add('starfield');
-          this.innerHTML = '⭐';
-          addStars();
-        }
-      });
-
-      // Add snowflakes and stars
-      function addSnowflakes() {
-        for (var i = 0; i < 100; i++) {
-          var snowflake = document.createElement('div');
-          snowflake.className = 'snowflake';
-          snowflake.innerHTML = '❄️';
-          snowflake.style.left = Math.random() * 100 + 'vw';
-          snowflake.style.animationDuration = Math.random() * 3 + 2 + 's';
-          document.body.appendChild(snowflake);
-        }
-      }
-
-      function addStars() {
-        for (var i = 0; i < 100; i++) {
-          var star = document.createElement('div');
-          star.className = 'star';
-          star.innerHTML = '⭐';
-          star.style.left = Math.random() * 100 + 'vw';
-          star.style.top = Math.random() * 100 + 'vh';
-          star.style.animationDuration = Math.random() * 3 + 2 + 's';
-          document.body.appendChild(star);
-        }
-      }
-
-      // Add snowflakes or stars based on the initial theme
-      var initialTheme = document.body.classList.contains('snow') ? 'light' : 'dark';
-      if (initialTheme === 'light') {
-        addSnowflakes();
-      } else {
-        addStars();
-      }
-    </script>
-
   </body>
 </html>
